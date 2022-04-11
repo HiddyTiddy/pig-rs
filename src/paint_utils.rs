@@ -1,15 +1,25 @@
 use std::f64::consts::PI;
 
-use sdl2::{render::Canvas, rect::Point};
+use sdl2::video::Window;
+use sdl2::{rect::Point, render::Canvas};
 
 pub const TWO_PI: f64 = 2.0 * PI;
 
-pub fn draw_circle(
-    canvas: &mut Canvas<sdl2::video::Window>,
-    x: i32,
-    y: i32,
-    radius: i32,
-) -> Result<(), String> {
+pub fn fill_circle(canvas: &mut Canvas<Window>, x: i32, y: i32, radius: i32) -> Result<(), String> {
+    assert!(radius >= 0);
+    let radius_2 = (radius * radius) as f64;
+    let y = y as f64;
+    for dx in -radius..radius + 1 {
+        let segment_length = (radius_2 - (dx * dx) as f64).sqrt();
+        canvas.draw_line(
+            Point::new(x + dx, (y + segment_length) as i32),
+            Point::new(x + dx, (y - segment_length) as i32),
+        )?;
+    }
+    Ok(())
+}
+
+pub fn draw_circle(canvas: &mut Canvas<Window>, x: i32, y: i32, radius: i32) -> Result<(), String> {
     assert!(radius >= 0);
     const SEGMENTS: usize = 100;
     for i in 0..SEGMENTS {
