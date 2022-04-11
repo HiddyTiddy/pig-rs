@@ -3,7 +3,7 @@ use std::f64::consts::PI;
 use rand::{thread_rng, Rng};
 use sdl2::{pixels::Color, rect::Point, render::Canvas};
 
-use crate::paint_utils::{draw_circle, TWO_PI};
+use crate::paint_utils::{draw_circle, TWO_PI, fill_circle};
 pub struct Pig {
     x: i32,
     y: i32,
@@ -36,10 +36,14 @@ impl Pig {
     pub fn draw(&self, canvas: &mut Canvas<sdl2::video::Window>) -> Result<(), String> {
         let x = self.x;
         let y = self.y;
-        canvas.set_draw_color(Color::RGBA(0xff, 0xc0, 0xcb, 255));
         // outline
         let ear_1 = PI * 1.25;
         let ear_2 = PI * 1.75;
+
+        canvas.set_draw_color(Color::RGBA(0xdb, 0x70, 0x93, 0xff));
+        fill_circle(canvas, x, y, 150)?;
+
+        canvas.set_draw_color(Color::RGBA(0xff, 0xc0, 0xcb, 255));
         {
             let radius = 150;
             assert!(radius >= 0);
