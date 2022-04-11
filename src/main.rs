@@ -31,6 +31,7 @@ fn main() -> Result<(), String> {
 
     let mut pig = Pig::new(400,400);
     let mut last_update = Instant::now();
+    let mut do_update = true;
 
     'main_loop: loop {
         for event in event_pump.poll_iter() {
@@ -40,12 +41,20 @@ fn main() -> Result<(), String> {
                     keycode: Some(Keycode::Escape),
                     ..
                 } => break 'main_loop,
+
+                Event::KeyDown {
+                    keycode: Some(Keycode::Space),
+                    ..
+                } => do_update = !do_update,
+
                 _ => {}
             }
         }
 
         if last_update.elapsed() > Duration::from_millis(10) {
-            pig.update();
+            if do_update {
+                pig.update();
+            }
 
             canvas.set_draw_color(Color::RGBA(0x2e, 0x34, 0x40, 255));
             canvas.clear();
