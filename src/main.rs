@@ -5,8 +5,6 @@ use sdl2::{event::Event, keyboard::Keycode, pixels::Color};
 mod pig;
 mod paint_utils;
 
-
-
 fn main() -> Result<(), String> {
     let sdl_context = sdl2::init()?;
     let video_subsystem = sdl_context.video()?;
@@ -22,10 +20,6 @@ fn main() -> Result<(), String> {
         .accelerated()
         .build()
         .map_err(|e| e.to_string())?;
-
-
-    // let texture_creator = canvas.texture_creator();
-    // let timer = sdl_context.timer();
 
     let mut event_pump = sdl_context.event_pump()?;
 
