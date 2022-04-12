@@ -40,8 +40,8 @@ impl Pig {
         let ear_1 = PI * 1.25;
         let ear_2 = PI * 1.75;
 
-        canvas.set_draw_color(Color::RGBA(0xdb, 0x70, 0x93, 0xff));
-        fill_circle(canvas, x, y, 150)?;
+        // canvas.set_draw_color(Color::RGBA(0xdb, 0x70, 0x93, 0xff));
+        // fill_circle(canvas, x, y, 150)?;
 
         canvas.set_draw_color(Color::RGBA(0xff, 0xc0, 0xcb, 255));
         {
