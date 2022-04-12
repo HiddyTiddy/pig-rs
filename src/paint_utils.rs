@@ -19,6 +19,13 @@ pub fn fill_circle(canvas: &mut Canvas<Window>, x: i32, y: i32, radius: i32) -> 
     Ok(())
 }
 
+pub fn fill_triangle(canvas: &mut Canvas<Window>, point_a: Point, point_b: Point, point_c: Point) -> Result<(), String> {
+    let height = point_a - point_b;
+    let height = (height.x * height.x + height.y + height.y) as f64;
+    let height = height.sqrt();
+    Ok(())
+}
+
 pub fn draw_circle(canvas: &mut Canvas<Window>, x: i32, y: i32, radius: i32) -> Result<(), String> {
     assert!(radius >= 0);
     const SEGMENTS: usize = 100;
